@@ -129,8 +129,13 @@ class DynamixelController:
                 speed
             )
      def get_temp(self):
-        temp, _, _ = self.packetHandler.read1ByteTxRx(self.portHandler,self.id,cn.PRESENT_TEMP)
+        temp, _, _ = self.packetHandler.read1ByteTxRx(self.portHandler,self.id,cn.ADDR_PRESENT_TEMP)
         return temp
+
+     def deg_to_pos(self, deg):
+         deg = max(0, min(1023, (1023*deg)/300))
+         return deg
+         
 
          
             # if res != COMM_SUCCESS:
