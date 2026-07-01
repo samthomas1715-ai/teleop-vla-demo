@@ -2,9 +2,9 @@ from dynamixel_sdk import *
 import config as con
 class Dyanmixelline:
     def __init__(self, port_, baudrate):
-        self.port = PortHandler(self.port_)
+        self.port = PortHandler(port_)
         self.port.openPort()
-        self.port.setBaudRate(self.baudrate)
+        self.port.setBaudRate(baudrate)
         self.packethandler = PacketHandler(con.PROTOCOL_VERSION)
 
 
