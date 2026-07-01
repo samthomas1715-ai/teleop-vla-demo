@@ -1,5 +1,5 @@
 import numpy as np
-from func import Dynamixelax
+from dynamixel import DynamixelController, Dynamixelline
 
 def tfm(t, alp, d, a):
     st = np.sin(t)
@@ -35,33 +35,35 @@ T4142 = tfm(t4, np.pi/2, 0, 0)
 T425 = tfm(t5, 0, d5, 0)
 
 T = T001@T011@T12@T23@T331@T314@T441@T4142@T425
+line1 = Dynamixelline("COM3", 57600)
 
 
-base = Dynamixelax(1)
-shldr = Dynamixelax(2)
-elb = Dynamixelax(3)
-ptch = Dynamixelax(4)
-yaw = Dynamixelax(5)
-roll = Dynamixelax(6)
+
+base = Dynamixelax(1, line1)
+shldr = Dynamixelax(2, line1)
+elb = Dynamixelax(3, line1)
+ptch = Dynamixelax(4, line1)
+yaw = Dynamixelax(5, line1)
+roll = Dynamixelax(6, line1)
 
 
 th1=base.degrees_to_position(t0)
-base.moveto_pos(th1)
+base.move_to_pos(th1)
 
 th2 = shldr.degrees_to_position(t1)
-shldr.moveto_pos(t1)
+shldr.move_to_pos(t1)
 
 th3 = shldr.degrees_to_position(t2)
-shldr.moveto_pos(t2)
+shldr.move_to_pos(t2)
 
 th4 = shldr.degrees_to_position(t3)
-shldr.moveto_pos(t3)
+shldr.move_to_pos(t3)
 
 th5 = shldr.degrees_to_position(t4)
-shldr.moveto_pos(t4)
+shldr.move_to_pos(t4)
 
 th6 = shldr.degrees_to_position(t5)
-shldr.moveto_pos(t5)
+shldr.move_to_pos(t5)
 
 print("x=", T[0,3])
 print("y=", T[1, 3])
