@@ -1,16 +1,23 @@
 from dynamixel_sdk import *
 import config as con
+class Dyanmixelline:
+    def __init__(self, port_, baudrate):
+        self.port = PortHandler(self.port_)
+        self.port.openPort()
+        self.port.setBaudRate(self.baudrate)
+        self.packethandler = PacketHandler(con.PROTOCOL_VERSION)
+
 
 
 class DynamixelController:
 
-    def __init__(self, port, motor_ids):
+    def __init__(self,  motor_ids, line):
 
-        self.port = port
+        
         self.motor_ids = motor_ids
 
         self.porthandler = PortHandler(self.port)
-        self.packethandler = PacketHandler(con.PROTOCOL_VERSION)
+        
 
 
     def connect(self):
