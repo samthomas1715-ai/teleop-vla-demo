@@ -139,9 +139,9 @@ class DynamixelController:
         temp, _, _ = self.packetHandler.read1ByteTxRx(self.portHandler,self.id,cn.ADDR_PRESENT_TEMP)
         return temp
 
-     def deg_to_pos(self, deg):
-         deg = max(0, min(1023, (1023*deg)/300))
-         return deg
+     def degrees_to_position(self, deg):
+        deg = max(0, min(300, deg))
+        return int(deg*1023/300)
          
 
          
