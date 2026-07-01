@@ -16,7 +16,7 @@ class DynamixelController:
         
         self.motor_ids = motor_ids
 
-        self.porthandler = PortHandler(self.port)
+       
         
 
 
