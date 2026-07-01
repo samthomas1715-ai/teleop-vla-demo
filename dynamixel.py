@@ -1,6 +1,6 @@
 from dynamixel_sdk import *
 import config as con
-class Dyanmixelline:
+class Dynamixelline:
     def __init__(self, port_, baudrate):
         self.port = PortHandler(port_)
         self.port.openPort()
