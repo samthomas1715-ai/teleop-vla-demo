@@ -128,6 +128,9 @@ class DynamixelController:
                 con.ADDR_MOVING_SPEED,
                 speed
             )
+     def get_temp(self):
+        temp, _, _ = self.packetHandler.read1ByteTxRx(self.portHandler,self.id,cn.PRESENT_TEMP)
+        return temp
 
          
             # if res != COMM_SUCCESS:
