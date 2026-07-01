@@ -13,7 +13,8 @@ class DynamixelController:
 
     def __init__(self,  motor_ids, line):
 
-        
+        self.porthandler = line.port
+        self.packethandler = line.packethandler
         self.motor_ids = motor_ids
 
        
@@ -135,8 +136,9 @@ class DynamixelController:
                 con.ADDR_MOVING_SPEED,
                 speed
             )
-     def get_temp(self):
-        temp, _, _ = self.packetHandler.read1ByteTxRx(self.portHandler,self.id,cn.ADDR_PRESENT_TEMP)
+            
+     def get_temp(self,dx_id):
+        temp, _, _ = self.packethandler.read1ByteTxRx(self.porthandler,dx_id,con.ADDR_PRESENT_TEMP)
         return temp
 
      def degrees_to_position(self, deg):
