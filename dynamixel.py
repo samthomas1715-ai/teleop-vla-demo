@@ -6,7 +6,8 @@ class Dynamixelline:
         self.port.openPort()
         self.port.setBaudRate(baudrate)
         self.packethandler = PacketHandler(con.PROTOCOL_VERSION)
-
+    def closeport(self):
+        self.port.closePort()
 
 
 class DynamixelController:
@@ -18,19 +19,16 @@ class DynamixelController:
         self.motor_ids = motor_ids
 
        
-        
+    # def connect(self):
+    #     if self.porthandler.openPort():
+    #         print(f"Connected to {self.port}")
+    #     else:
+    #         raise Exception(f"Failed to open {self.port}")
 
-
-    def connect(self):
-        if self.porthandler.openPort():
-            print(f"Connected to {self.port}")
-        else:
-            raise Exception(f"Failed to open {self.port}")
-
-        if self.porthandler.setBaudRate(con.BAUDRATE):
-            print(f"Baudrate set to {con.BAUDRATE}")
-        else:
-            raise Exception("Failed to set baudrate")
+    #     if self.porthandler.setBaudRate(con.BAUDRATE):
+    #         print(f"Baudrate set to {con.BAUDRATE}")
+    #     else:
+    #         raise Exception("Failed to set baudrate")
 
 
     def disconnect(self):

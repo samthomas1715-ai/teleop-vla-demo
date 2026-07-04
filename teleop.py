@@ -15,14 +15,18 @@ def teleoperation():
 
     try:
         while True:
-            positions = leader.get_pos()
+            leader_pos = leader.get_pos()
+            goal_positions = {}
+            delta = {}
 
-            #if follower and leader have diff ids
-            follower_positions = {}
+            for leader_id in con.LEADER_IDS:
+                delta[leader_id] = leader_pos[leader_id] - cb.FOLLOWER_HOME[leader_id]
+      
             for leader_id, follower_id in zip(con.LEADER_IDS, con.FOLLOWER_IDS):
-                follower_positions[follower_id] = positions[leader_id]
+                goal_positions[follower_id] = cb.FOLLOWER_HOME[follower_id] + delta[leader_id]
+            #check direction of rotation of the motors
 
-            follower.move_all_to_pos(follower_positions)
+            follower.move_all_to_pos(goal_positions)
             time.sleep(0.01)
 
     except KeyboardInterrupt:
@@ -30,5 +34,5 @@ def teleoperation():
 
     finally:
         follower.tq_disb()
-        leader_line.port.closePort()
-        follower_line.port.closePort()
+        leader_line.closeport()
+        follower_line.closeport()
