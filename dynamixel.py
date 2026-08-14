@@ -1,5 +1,6 @@
 from dynamixel_sdk import *
 import config as con
+
 class Dynamixelline:
     def __init__(self, port_, baudrate):
         self.port = PortHandler(port_)
@@ -73,7 +74,7 @@ class DynamixelController:
         for id in self.motor_ids:
             pos,res,err = self.packethandler.read2ByteTxRx(self.port,id)
         if res != COMM_SUCCESS:
-           print(self.ph.getTxRxResult(res))
+           print(self.packethandler.getTxRxResult(res))
            return None
         if err != 0:
            print(self.packethandler.getRxPacketError(err))
@@ -135,11 +136,11 @@ class DynamixelController:
                 speed
             )
             
-     def get_temp(self,dx_id):
+    def get_temp(self,dx_id):
         temp, _, _ = self.packethandler.read1ByteTxRx(self.porthandler,dx_id,con.ADDR_PRESENT_TEMP)
         return temp
 
-     def degrees_to_position(self, deg):
+    def degrees_to_position(self, deg):
         deg = max(0, min(300, deg))
         return int(deg*1023/300)
          
