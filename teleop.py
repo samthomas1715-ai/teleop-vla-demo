@@ -1,6 +1,7 @@
 from dynamixel import  Dynamixelline,DynamixelController
 import config as con
 import time
+import calibration as cb
 
 def teleoperation():
 
@@ -20,7 +21,7 @@ def teleoperation():
             delta = {}
 
             for leader_id in con.LEADER_IDS:
-                delta[leader_id] = leader_pos[leader_id] - cb.FOLLOWER_HOME[leader_id]
+                delta[leader_id] = leader_pos[leader_id] - cb.LEADER_HOME[leader_id]
       
             for leader_id, follower_id in zip(con.LEADER_IDS, con.FOLLOWER_IDS):
                 goal_positions[follower_id] = cb.FOLLOWER_HOME[follower_id] + delta[leader_id]
