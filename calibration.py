@@ -1,4 +1,4 @@
-from gitgitdynamixel import Dynamixelline, DynamixelController
+from dynamixel import Dynamixelline, DynamixelController
 import config as con
 
 
