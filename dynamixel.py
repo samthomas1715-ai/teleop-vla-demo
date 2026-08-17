@@ -72,7 +72,7 @@ class DynamixelController:
     
     def result_all(self):
         for id in self.motor_ids:
-            pos,res,err = self.packethandler.read2ByteTxRx(self.port,id)
+            pos,res,err = self.packethandler.read2ByteTxRx(self.porthandler,id)
         if res != COMM_SUCCESS:
            print(self.packethandler.getTxRxResult(res))
            return None
