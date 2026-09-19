@@ -85,11 +85,14 @@ class DynamixelController:
         if dx_id == None:
             positions = {}
             for id in self.motor_ids:
+                
                 pose, res, err = self.packethandler.read2ByteTxRx(
                     self.porthandler,
                     id,
                     con.ADDR_PRESENT_POSITION,
                 )
+                if res != COMM_SUCCESS or err != 0:
+                    return None
                 positions[id] = pose
             return positions
         else:
@@ -101,6 +104,7 @@ class DynamixelController:
         return position
     
     def move_to_pos(self, pos, dx_id):
+        pos = max(0, min(1023, int(pos))
 
         res, err = self.packethandler.write2ByteTxRx(
             self.porthandler,
